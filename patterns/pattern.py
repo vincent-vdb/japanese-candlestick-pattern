@@ -23,13 +23,13 @@ class Pattern:
 
         Returns
         -------
-        real_body : ndarray
+        real_body : pandas.Series
             real body for each candlestick, can be either positive or negative
-        upper_shadow : ndarray
+        upper_shadow : pandas.Series
             upper shadow for each candlestick
-        lower_shadow : ndarray
+        lower_shadow : pandas.Series
             lower shadow for each candlestick
-        total_range : ndarray
+        total_range : pandas.Series
             total range, from low to high, for each candlestick
         """
 
