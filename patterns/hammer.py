@@ -18,7 +18,7 @@ class Hammer(Pattern):
         """
         Computes if a candlestick is a Hammer (or Hanging man, since no trend is computed)
         """
-        self.data['Hammer'] = np.logical_and(self.lower_shadow >= 2 * self.real_body,
+        self.data['Hammer'] = np.logical_and(self.lower_shadow >= 2 * np.abs(self.real_body),
                                              self.upper_shadow <= 0.05 * self.total_range)
 
         return self.data

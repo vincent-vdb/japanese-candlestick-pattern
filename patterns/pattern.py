@@ -24,7 +24,7 @@ class Pattern:
         Returns
         -------
         real_body : ndarray
-            real body for each candlestick
+            real body for each candlestick, can be either positive or negative
         upper_shadow : ndarray
             upper shadow for each candlestick
         lower_shadow : ndarray
@@ -33,7 +33,7 @@ class Pattern:
             total range, from low to high, for each candlestick
         """
 
-        real_body = np.abs(self.data.Open - self.data.Close)
+        real_body = self.data.Close - self.data.Open
         upper_shadow = np.minimum(self.data.High - self.data.Close, self.data.High - self.data.Open)
         lower_shadow = np.minimum(self.data.Close - self.data.Low, self.data.Open - self.data.Low)
         total_range = self.data.High - self.data.Close
