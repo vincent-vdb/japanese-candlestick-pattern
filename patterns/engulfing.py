@@ -5,7 +5,7 @@ from patterns.pattern import Pattern
 
 class Engulfing(Pattern):
     def __init__(self, data):
-        """Constructor of Hammer class
+        """Constructor of Engulfing class
 
         Parameters
         ----------
@@ -25,7 +25,7 @@ class Engulfing(Pattern):
 
         Engulfing strength is computed according to the following rules of Nison:
         - The bigger the second candle real body, the higher the strength
-        - The higher the second candle volume, the higher the strength
+        - The higher the second candle volume, the higher the strength (not yet taken into account)engulfing.py
 
         Warning, this does not check the trend, which is a very important part of engulfing patterns!
 
@@ -37,7 +37,7 @@ class Engulfing(Pattern):
                 - 'Engulfing_strength' that is either 0 (when no engulfing, see above),
                 positive when bullish engulfing, negative when bearing engulfing
         """
-        engulfing_strength = self.real_body/self.real_body.shift()
+        engulfing_strength = self.real_body / self.real_body.shift()
         engulfing = engulfing_strength < -1
         self.data['Engulfing'] = engulfing
         self.data['Engulfing_strength'] = np.abs(engulfing_strength) * engulfing * np.sign(self.real_body)
