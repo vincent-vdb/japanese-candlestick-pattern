@@ -22,6 +22,11 @@ class Hammer(Pattern):
         - Real body is on upper part (no matter the color)
         - Lower shadow should be at least two times the real body
         - No or really small upper shadow (actually quite same as condition 1)
+
+        Returns
+        -------
+        self.data : pandas.DataFrame
+            the input dataframe, with a new column 'Hammer' with bool
         """
         self.data['Hammer'] = np.logical_and(self.lower_shadow >= 2 * np.abs(self.real_body),
                                              self.upper_shadow <= 0.05 * self.total_range)
