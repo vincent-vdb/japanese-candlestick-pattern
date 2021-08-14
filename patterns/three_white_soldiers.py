@@ -29,7 +29,7 @@ class ThreeWhiteSoldiers(Pattern):
         -------
         self.data : pandas.DataFrame
             the input dataframe, with two new columns:
-                - 'ThreeWhiteSoldiers' with bool
+                - 'three_white_soldiers' with bool
         """
         # Three positive candles in a row
         three_positive = np.all([self.real_body > 0,
@@ -42,6 +42,6 @@ class ThreeWhiteSoldiers(Pattern):
                                 self.upper_shadow.shift(2) / self.real_body.shift(2) < self.upper_shadow_threshold],
                                axis=0)
 
-        self.data['ThreeWhiteSoldiers'] = np.logical_and(three_positive, upper_shadows)
+        self.data['three_white_soldiers'] = np.logical_and(three_positive, upper_shadows)
 
         return self.data

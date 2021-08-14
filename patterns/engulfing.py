@@ -33,13 +33,13 @@ class Engulfing(Pattern):
         -------
         self.data : pandas.DataFrame
             the input dataframe, with two new columns:
-                - 'Engulfing' with bool
-                - 'Engulfing_strength' that is either 0 (when no engulfing, see above),
+                - 'engulfing' with bool
+                - 'engulfing_strength' that is either 0 (when no engulfing, see above),
                 positive when bullish engulfing, negative when bearing engulfing
         """
         engulfing_strength = self.real_body / self.real_body.shift()
         engulfing = engulfing_strength < -1
-        self.data['Engulfing'] = engulfing
-        self.data['Engulfing_strength'] = np.abs(engulfing_strength) * engulfing * np.sign(self.real_body)
+        self.data['engulfing'] = engulfing
+        self.data['engulfing_strength'] = np.abs(engulfing_strength) * engulfing * np.sign(self.real_body)
 
         return self.data

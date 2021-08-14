@@ -32,13 +32,13 @@ class Harami(Pattern):
         -------
         self.data : pandas.DataFrame
             the input dataframe, with two new columns:
-                - 'Harami' with bool
-                - 'Harami_strength' that is either 0 (when no engulfing, see above),
+                - 'harami' with bool
+                - 'harami_strength' that is either 0 (when no engulfing, see above),
                 positive when bullish engulfing, negative when bearing engulfing
         """
         harami_strength = self.real_body.shift() / self.real_body
         harami = harami_strength < -self.harami_threshold
-        self.data['Harami'] = harami
-        self.data['Harami_strength'] = np.abs(harami_strength) * harami * np.sign(self.real_body)
+        self.data['harami'] = harami
+        self.data['harami_strength'] = np.abs(harami_strength) * harami * np.sign(self.real_body)
 
         return self.data

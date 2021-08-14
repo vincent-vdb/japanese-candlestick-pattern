@@ -29,7 +29,7 @@ class ThreeBlackCrows(Pattern):
         -------
         self.data : pandas.DataFrame
             the input dataframe, with two new columns:
-                - 'ThreeBlackCrows' with bool
+                - 'three_black_crows' with bool
         """
         # Three positive candles in a row
         three_negative = np.all([self.real_body < 0,
@@ -42,6 +42,6 @@ class ThreeBlackCrows(Pattern):
                                 self.lower_shadow.shift(2) / np.abs(self.real_body.shift(2)) < self.lower_shadow_threshold],
                                axis=0)
 
-        self.data['ThreeBlackCrows'] = np.logical_and(three_negative, lower_shadows)
+        self.data['three_black_crows'] = np.logical_and(three_negative, lower_shadows)
 
         return self.data
