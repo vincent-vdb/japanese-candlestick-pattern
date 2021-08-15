@@ -3,6 +3,7 @@ sys.path.append('..')
 
 import pandas as pd
 from binance.client import Client
+import telegram_send
 
 from patterns.hammer import Hammer
 from patterns.engulfing import Engulfing
@@ -71,6 +72,9 @@ class Notifier:
                     candles = pat.compute_pattern()
                     # Check if the pattern is detected
                     if candles.iloc[-1][pattern]:
-                        print('pattern', pattern, 'detected for', pair)
+                        message = 'pattern ' + pattern + ' detected for ' + pair
                         if pattern + '_strength' in candles.columns:
-                            print('\t with strength:', candles.iloc[-1][pattern + '_strength'])
+                            strength = 'with strength: ' + str(candles.iloc[-1][pattern + '_strength'])
+                            message = message + strength
+                        # Send the telegram notif
+                        telegram_send.send(messages=[message])
