@@ -1,9 +1,12 @@
 import sys
+import time
 sys.path.append('..')
 
+import numpy as np
 import pandas as pd
 from binance.client import Client
 import telegram_send
+import schedule  # first time pip install schedule
 
 from patterns.hammer import Hammer
 from patterns.engulfing import Engulfing
@@ -78,3 +81,42 @@ class Notifier:
                             message = message + strength
                         # Send the telegram notif
                         telegram_send.send(messages=[message])
+
+    def launch_scheduler(self):
+        """
+        Methods automatically launches the self.detect_patterns() method at the right time.
+        e.g. for a 4 hours interval, the pattern detection will be launched every 4 hours.
+        """
+        # Get the interval information
+        time_number = int(self.interval[:-1])
+        time_unit = self.interval[-1]
+
+        if time_unit == 'm':
+            # In case of minutes, to be sure it launches at minutes:
+            # 0, interval, 2*interval...60-interval of every hour
+            # Loop over all the minutes you want it to be launched
+            for i in np.arange(0, 60, time_number):
+                minute_time = str(i)
+                if len(minute_time) == 1:
+                    minute_time = '0' + minute_time
+                minute_time = minute_time + ':00'
+                schedule.every(1).hours.at(minute_time).do(self.detect_patterns)
+        elif time_unit == 'h':
+            # Same as minutes, for example with interval 4h to be sure it launches at
+            # 0:00, 4:00, 8:00, 12:00, 16:00, 20:00
+            # Make a loop on all those hours
+            for i in np.arange(0, 24, time_number):
+                hour_time = str(i)
+                if len(hour_time) == 1:
+                    hour_time = '0' + hour_time
+                hour_time = hour_time + ':00'
+                schedule.every(1).days.at(hour_time).do(self.detect_patterns)
+        elif time_unit == 'd':
+            schedule.every(time_number).days.at("00:00:00").do(self.detect_patterns)
+        elif time_unit == 'w':
+            schedule.every(time_number).monday.at("00:00").do(self.detect_patterns)
+
+        # Put the scheduling in a infinite loop
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
