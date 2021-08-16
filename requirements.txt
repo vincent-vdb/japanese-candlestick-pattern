@@ -1,0 +1,5 @@
+numpy
+pandas
+python-binance
+telegram-send
+schedule
