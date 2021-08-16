@@ -71,10 +71,9 @@ class Pattern:
             - A large negative value for downward/bearish trend
             - A close to zero value for a neutral trend
         """
-
         # Compute the average value between Close and Open
         average = 0.5 * (self.data.Close + self.data.Open)
         # Compute the trend as the diff between those values
-        trend = (average - average[-trend_lookback]) / average
+        trend = (average - average.iloc[-trend_lookback]) / average
 
         return trend

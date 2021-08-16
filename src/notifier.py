@@ -56,8 +56,8 @@ class Notifier:
         """
         # Loop over all the pairs, get the history candles, detect the patterns
         for pair in self.pairs:
-            # Get 5 times the interval of history
-            history = int(self.interval[:-1]) * 5
+            # Get 5 + 1 times the interval of history
+            history = int(self.interval[:-1]) * 6
             unit = ' day' if self.interval[-1] == 'd' else self.interval[-1]
             history = str(history) + unit + ' ago UTC'
             # Get the candles
