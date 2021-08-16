@@ -39,3 +39,42 @@ class Pattern:
         total_range = self.data.High - self.data.Close
 
         return real_body, upper_shadow, lower_shadow, total_range
+
+    def compute_percent_change(self):
+        """Computes the the percentage of change per candle.
+        Meaning, the computation of (Close - Open)/Open.
+
+        Returns
+        -------
+        change : float
+            The percentage change per candle
+        """
+        return (self.data.Close - self.data.Open) / self.data.Open
+
+    def compute_relative_trend(self, trend_lookback: int = 5):
+        """Computes the relative trend: upward or downward, in the trend_lookback period
+        The trend is relative in the way it is divided by the value at trend_lookback, thus
+        providing a relative increasing or decreasing trend.
+        For example, if the average price increases from 100 to 110 in trend_lookback periods, the
+        output trend would be (110-100)/100 = 0.1
+
+        Parameters
+        ----------
+        trend_lookback : int
+            Number of time intervals to consider for computing the trend.
+            Defaults to 5.
+        Returns
+        -------
+        trend : float
+            A trend value:
+            - A large positive value for upward/bullish trend
+            - A large negative value for downward/bearish trend
+            - A close to zero value for a neutral trend
+        """
+
+        # Compute the average value between Close and Open
+        average = 0.5 * (self.data.Close + self.data.Open)
+        # Compute the trend as the diff between those values
+        trend = (average - average[-trend_lookback]) / average
+
+        return trend
