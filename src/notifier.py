@@ -9,6 +9,7 @@ import telegram_send
 import schedule  # first time pip install schedule
 
 from patterns.hammer import Hammer
+from patterns.hanging_man import HangingMan
 from patterns.engulfing import Engulfing
 from patterns.harami import Harami
 from patterns.three_white_soldiers import ThreeWhiteSoldiers
@@ -16,6 +17,7 @@ from patterns.three_black_crows import ThreeBlackCrows
 
 implemented_patterns = {'engulfing': Engulfing,
                         'hammer': Hammer,
+                        'hanging_man': HangingMan,
                         'harami': Harami,
                         'three_black_crows': ThreeBlackCrows,
                         'three_white_soldiers': ThreeWhiteSoldiers}
@@ -23,7 +25,7 @@ implemented_patterns = {'engulfing': Engulfing,
 
 class Notifier:
     def __init__(self, binance_public_key: str, binance_secret_key: str,
-                 patterns: list, interval: str = '1d', pairs: str = ['BTCBUSD']):
+                 patterns: list, interval: str = '1d', pairs: list = ['BTCBUSD']):
         """
         Constructor of the Notifier
 
