@@ -66,6 +66,8 @@ class Notifier:
                                             'Close time', 'Quote asset volume', 'Number of trades',
                                             'Taker buy base vol', 'Taker buy quote vol', 'Ignore'],
                                    dtype=float)
+            # Remove the last line, since this is the current (and unfinished) candle
+            candles = candles.iloc[:-1]
             # Detect the patterns
             for pattern in self.patterns:
                 if pattern in implemented_patterns.keys():
@@ -77,7 +79,7 @@ class Notifier:
                     if candles.iloc[-1][pattern]:
                         message = 'pattern ' + pattern + ' detected for ' + pair
                         if pattern + '_strength' in candles.columns:
-                            strength = 'with strength: ' + str(candles.iloc[-1][pattern + '_strength'])
+                            strength = ' with strength: ' + str(candles.iloc[-1][pattern + '_strength'])
                             message = message + strength
                         # Send the telegram notif
                         telegram_send.send(messages=[message])
@@ -99,7 +101,7 @@ class Notifier:
                 minute_time = str(i)
                 if len(minute_time) == 1:
                     minute_time = '0' + minute_time
-                minute_time = minute_time + ':00'
+                minute_time = minute_time + ':01'
                 schedule.every(1).hours.at(minute_time).do(self.detect_patterns)
         elif time_unit == 'h':
             # Same as minutes, for example with interval 4h to be sure it launches at
@@ -109,10 +111,10 @@ class Notifier:
                 hour_time = str(i)
                 if len(hour_time) == 1:
                     hour_time = '0' + hour_time
-                hour_time = hour_time + ':00'
+                hour_time = hour_time + ':00:01'
                 schedule.every(1).days.at(hour_time).do(self.detect_patterns)
         elif time_unit == 'd':
-            schedule.every(time_number).days.at("00:00:00").do(self.detect_patterns)
+            schedule.every(time_number).days.at("00:00:01").do(self.detect_patterns)
         elif time_unit == 'w':
             schedule.every(time_number).monday.at("00:00").do(self.detect_patterns)
 
