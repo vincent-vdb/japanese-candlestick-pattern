@@ -79,9 +79,9 @@ class Notifier:
                     candles = pat.compute_pattern()
                     # Check if the pattern is detected
                     if candles.iloc[-1][pattern]:
-                        message = 'pattern ' + pattern + ' detected for ' + pair
+                        message = pattern + ' pattern detected for ' + pair + ' | interval ' + self.interval
                         if pattern + '_strength' in candles.columns:
-                            strength = ' with strength: ' + "{:.2f}".format(candles.iloc[-1][pattern + '_strength'])
+                            strength = '\n with strength: ' + "{:.2f}".format(candles.iloc[-1][pattern + '_strength'])
                             message = message + strength
                         # Send the telegram notif
                         telegram_send.send(messages=[message])
@@ -113,12 +113,12 @@ class Notifier:
                 hour_time = str(i)
                 if len(hour_time) == 1:
                     hour_time = '0' + hour_time
-                hour_time = hour_time + ':00:01'
+                hour_time = hour_time + ':00:10'
                 schedule.every(1).days.at(hour_time).do(self.detect_patterns)
         elif time_unit == 'd':
-            schedule.every(time_number).days.at("00:00:01").do(self.detect_patterns)
+            schedule.every(time_number).days.at("00:01:00").do(self.detect_patterns)
         elif time_unit == 'w':
-            schedule.every(time_number).monday.at("00:00").do(self.detect_patterns)
+            schedule.every(time_number).monday.at("00:01").do(self.detect_patterns)
 
         # Put the scheduling in a infinite loop
         while True:
