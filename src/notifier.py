@@ -25,7 +25,8 @@ implemented_patterns = {'engulfing': Engulfing,
 
 class Notifier:
     def __init__(self, binance_public_key: str, binance_secret_key: str,
-                 patterns: list, interval: str = '1d', pairs: list = ['BTCBUSD']):
+                 patterns: list, interval: str = '1d', pairs: list = ['BTCBUSD'],
+                 telegram_notif: bool = True):
         """
         Constructor of the Notifier
 
@@ -44,11 +45,15 @@ class Notifier:
         pairs : list or str
             An example would be ['BNBBTC', 'BTCBUSD'] for a BNB/BTC and a BTC/BUSD pairs
             Default is ['BTCBUSD'] for the BTC to USD pair.
+        telegram_notif : bool
+            If True, the notif will be output to telegram.
+            If False, the notif is on standard output.
         """
         self.client = Client(binance_public_key, binance_secret_key)
         self.patterns = patterns
         self.interval = interval
         self.pairs = pairs
+        self.telegram_notif = telegram_notif
 
     def detect_patterns(self):
         """
@@ -83,8 +88,11 @@ class Notifier:
                         if pattern + '_strength' in candles.columns:
                             strength = '\n with strength: ' + "{:.2f}".format(candles.iloc[-1][pattern + '_strength'])
                             message = message + strength
-                        # Send the telegram notif
-                        telegram_send.send(messages=[message])
+                        # Send the notif
+                        if self.telegram_notif:
+                            telegram_send.send(messages=[message])
+                        else:
+                            print(message)
 
     def launch_scheduler(self):
         """
