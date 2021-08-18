@@ -88,6 +88,8 @@ class Notifier:
                         if pattern + '_strength' in candles.columns:
                             strength = '\n with strength: ' + "{:.2f}".format(candles.iloc[-1][pattern + '_strength'])
                             message = message + strength
+                        if pattern + '_stop_loss' in candles.columns:
+                            message = message + '\n stop loss: ' + str(candles.iloc[-1][pattern + '_stop_loss'])
                         # Send the notif
                         if self.telegram_notif:
                             telegram_send.send(messages=[message])
