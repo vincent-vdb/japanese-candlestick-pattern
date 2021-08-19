@@ -42,6 +42,5 @@ class HangingMan(Pattern):
                               self.trend >= self.trend_threshold],
                              axis=0)
         self.data['hanging_man'] = hanging_man
-        self.data['trend'] = self.trend
 
         return self.data
