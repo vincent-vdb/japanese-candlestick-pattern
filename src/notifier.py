@@ -10,6 +10,8 @@ import schedule  # first time pip install schedule
 
 from patterns.hammer import Hammer
 from patterns.hanging_man import HangingMan
+from patterns.inverted_hammer import InvertedHammer
+from patterns.shooting_star import ShootingStar
 from patterns.engulfing import Engulfing
 from patterns.harami import Harami
 from patterns.three_white_soldiers import ThreeWhiteSoldiers
@@ -18,6 +20,8 @@ from patterns.three_black_crows import ThreeBlackCrows
 implemented_patterns = {'engulfing': Engulfing,
                         'hammer': Hammer,
                         'hanging_man': HangingMan,
+                        'inverted_hammer': InvertedHammer,
+                        'shooting_star': ShootingStar,
                         'harami': Harami,
                         'three_black_crows': ThreeBlackCrows,
                         'three_white_soldiers': ThreeWhiteSoldiers}
