@@ -36,12 +36,23 @@ class Pattern:
         real_body = self.data.Close - self.data.Open
         upper_shadow = np.minimum(self.data.High - self.data.Close, self.data.High - self.data.Open)
         lower_shadow = np.minimum(self.data.Close - self.data.Low, self.data.Open - self.data.Low)
-        total_range = self.data.High - self.data.Close
+        total_range = self.data.High - self.data.Low
 
         return real_body, upper_shadow, lower_shadow, total_range
 
+    def compute_total_range_percent_change(self):
+        """Computes the total range percentage of change per candle.
+        Meaning, the computation of (High - Low)/Low.
+
+        Returns
+        -------
+        change : float
+            The total range percentage change per candle
+        """
+        return (self.data.High - self.data.Low) / self.data.Low
+
     def compute_percent_change(self):
-        """Computes the the percentage of change per candle.
+        """Computes the percentage of change per candle.
         Meaning, the computation of (Close - Open)/Open.
 
         Returns
