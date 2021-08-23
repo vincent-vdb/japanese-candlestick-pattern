@@ -15,7 +15,7 @@ class DragonflyDoji(Doji):
             The maximum percentage change threshold below which to consider a candle a Doji.
             A value of 0.003 means a real body absolute relative change of maximum 0.3%.
         total_range_change_threshold : float
-            The minimum total range threshold above which to consider a candle a gravestone doji.
+            The minimum total range threshold above which to consider a candle a dragonfly doji.
             A value of 0.02 means a total candle range (High - Low) absolute relative change of minimum 2%.
         """
         super().__init__(data, doji_threshold)
@@ -39,14 +39,13 @@ class DragonflyDoji(Doji):
         -------
         self.data : pandas.DataFrame
             the input dataframe, with two new columns:
-                - 'gravestone_doji' with bool
+                - 'dragonfly_doji' with bool
 
         """
-        gravestone_doji = np.all([self.is_doji(),
+        dragonfly_doji = np.all([self.is_doji(),
                                   self.lower_shadow > 0.8 * self.total_range,
                                   np.abs(self.total_range_percent_change) > self.total_range_change_threshold],
-
                                  axis=0)
-        self.data['dragonfly_doji'] = gravestone_doji
+        self.data['dragonfly_doji'] = dragonfly_doji
 
         return self.data

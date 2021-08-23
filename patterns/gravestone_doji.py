@@ -45,7 +45,6 @@ class GravestoneDoji(Doji):
         gravestone_doji = np.all([self.is_doji(),
                                   self.upper_shadow > 0.8 * self.total_range,
                                   np.abs(self.total_range_percent_change) > self.total_range_change_threshold],
-
                                  axis=0)
         self.data['gravestone_doji'] = gravestone_doji
 
