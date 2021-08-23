@@ -12,8 +12,11 @@ class GravestoneDoji(Doji):
         data : pandas dataframe
             A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
         doji_threshold : float
-            The maximum percentage change threshold below which to consider a candle a Harami.
+            The maximum percentage change threshold below which to consider a candle a Doji.
             A value of 0.003 means a real body absolute relative change of maximum 0.3%.
+        total_range_change_threshold : float
+            The minimum total range threshold above which to consider a candle a gravestone doji.
+            A value of 0.02 means a total candle range (High - Low) absolute relative change of minimum 2%.
         """
         super().__init__(data, doji_threshold)
         self.total_range_change_threshold = total_range_change_threshold
@@ -30,7 +33,7 @@ class GravestoneDoji(Doji):
         Since the long upper shadow and small lower shadow are not perfectly explicit,
         it is proposed to be computed the following way:
         - A total range above a given threshold, e.g. 2%
-        - An upper shadow of at least 90% of the total range
+        - An upper shadow of at least 80% of the total range
 
         Returns
         -------
@@ -44,8 +47,6 @@ class GravestoneDoji(Doji):
                                   np.abs(self.total_range_percent_change) > self.total_range_change_threshold],
 
                                  axis=0)
-        self.data['upper'] = self.upper_shadow
-        self.data['total_range'] = self.total_range
         self.data['gravestone_doji'] = gravestone_doji
 
         return self.data
