@@ -16,6 +16,10 @@ from patterns.engulfing import Engulfing
 from patterns.harami import Harami
 from patterns.three_white_soldiers import ThreeWhiteSoldiers
 from patterns.three_black_crows import ThreeBlackCrows
+from patterns.doji import Doji
+from patterns.dragonfly_doji import DragonflyDoji
+from patterns.gravestone_doji import GravestoneDoji
+from patterns.longlegged_doji import LongleggedDoji
 
 implemented_patterns = {'engulfing': Engulfing,
                         'hammer': Hammer,
@@ -24,7 +28,11 @@ implemented_patterns = {'engulfing': Engulfing,
                         'shooting_star': ShootingStar,
                         'harami': Harami,
                         'three_black_crows': ThreeBlackCrows,
-                        'three_white_soldiers': ThreeWhiteSoldiers}
+                        'three_white_soldiers': ThreeWhiteSoldiers,
+                        'doji': Doji,
+                        'dragonfly_doji': DragonflyDoji,
+                        'gravestone_doji': GravestoneDoji,
+                        'longlegged_doji': LongleggedDoji}
 
 
 class Notifier:
