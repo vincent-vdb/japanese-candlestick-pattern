@@ -36,8 +36,12 @@ implemented_patterns = {'engulfing': Engulfing,
 
 
 class Notifier:
-    def __init__(self, binance_public_key: str, binance_secret_key: str,
-                 patterns: list, interval: str = '1d', pairs: list = ['BTCBUSD'],
+    def __init__(self,
+                 binance_public_key: str,
+                 binance_secret_key: str,
+                 patterns: list,
+                 interval: str = '1d',
+                 pairs: list = ['BTCBUSD'],
                  telegram_notif: bool = True):
         """
         Constructor of the Notifier
@@ -67,7 +71,7 @@ class Notifier:
         self.pairs = pairs
         self.telegram_notif = telegram_notif
 
-    def detect_patterns(self):
+    def detect_patterns(self) -> None:
         """
         Methods that detects patterns for the given pairs and given interval in the constructor.
         """
@@ -108,7 +112,7 @@ class Notifier:
                         else:
                             print(message)
 
-    def launch_scheduler(self):
+    def launch_scheduler(self) -> None:
         """
         Methods automatically launches the self.detect_patterns() method at the right time.
         e.g. for a 4 hours interval, the pattern detection will be launched every 4 hours.

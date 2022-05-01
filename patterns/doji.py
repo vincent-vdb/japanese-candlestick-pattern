@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.pattern import Pattern
 
 
 class Doji(Pattern):
-    def __init__(self, data, doji_threshold: float = .003):
+    def __init__(self, data: pd.DataFrame, doji_threshold: float = .003):
         """Constructor of Doji class
 
         Parameters
@@ -19,7 +20,7 @@ class Doji(Pattern):
         self.doji_threshold = doji_threshold
         self.percent_change = self.compute_percent_change()
 
-    def is_doji(self):
+    def is_doji(self) -> pd.Series:
         """
         Returns True if a candlestick is a Doji. False otherwise.
 
@@ -31,7 +32,7 @@ class Doji(Pattern):
         doji_candle = np.abs((self.data.Close - self.data.Open) / self.data.Open) <= self.doji_threshold
         return doji_candle
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is a Doji.
         Condition is the following from Steve Nison:

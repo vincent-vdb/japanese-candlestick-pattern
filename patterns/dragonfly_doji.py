@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.doji import Doji
 
 
 class DragonflyDoji(Doji):
-    def __init__(self, data, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
+    def __init__(self, data: pd.DataFrame, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
         """Constructor of DragonflyDoji class
 
         Parameters
@@ -22,7 +23,7 @@ class DragonflyDoji(Doji):
         self.total_range_change_threshold = total_range_change_threshold
         self.total_range_percent_change = self.compute_total_range_percent_change()
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is a dragonfly doji.
         Condition is the following from Steve Nison:

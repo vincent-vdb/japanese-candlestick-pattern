@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.pattern import Pattern
 
 
 class ThreeBlackCrows(Pattern):
-    def __init__(self, data, lower_shadow_threshold: float = 0.5):
+    def __init__(self, data: pd.DataFrame, lower_shadow_threshold: float = 0.5):
         """Constructor of ThreeBlackCrows class
 
         Parameters
@@ -17,7 +18,7 @@ class ThreeBlackCrows(Pattern):
         super().__init__(data)
         self.lower_shadow_threshold = lower_shadow_threshold
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is a three white soldiers patterns.
         Conditions are the following from Steve Nison:

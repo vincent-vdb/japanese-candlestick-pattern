@@ -1,8 +1,11 @@
+from typing import Tuple
+
 import numpy as np
+import pandas as pd
 
 
 class Pattern:
-    def __init__(self, data):
+    def __init__(self, data: pd.DataFrame):
         """Constructor of Pattern class
 
         Parameters
@@ -14,7 +17,7 @@ class Pattern:
         self.data = data
         self.real_body, self.upper_shadow, self.lower_shadow, self.total_range = self.compute_characteristics()
 
-    def compute_characteristics(self):
+    def compute_characteristics(self) -> Tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
         """Computes the following characteristics of candlesticks:
         - real body
         - upper shadow
@@ -40,7 +43,7 @@ class Pattern:
 
         return real_body, upper_shadow, lower_shadow, total_range
 
-    def compute_total_range_percent_change(self):
+    def compute_total_range_percent_change(self) -> pd.Series:
         """Computes the total range percentage of change per candle.
         Meaning, the computation of (High - Low)/Low.
 
@@ -51,7 +54,7 @@ class Pattern:
         """
         return (self.data.High - self.data.Low) / self.data.Low
 
-    def compute_percent_change(self):
+    def compute_percent_change(self) -> pd.Series:
         """Computes the percentage of change per candle.
         Meaning, the computation of (Close - Open)/Open.
 
@@ -62,7 +65,7 @@ class Pattern:
         """
         return (self.data.Close - self.data.Open) / self.data.Open
 
-    def compute_relative_trend(self, trend_lookback: int = 5):
+    def compute_relative_trend(self, trend_lookback: int = 5) -> pd.Series:
         """Computes the relative trend: upward or downward, in the trend_lookback period
         The trend is relative in the way it is divided by the value at trend_lookback, thus
         providing a relative increasing or decreasing trend.

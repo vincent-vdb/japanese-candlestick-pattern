@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.pattern import Pattern
 
 
 class HangingMan(Pattern):
-    def __init__(self, data, trend_threshold: float = 0.03):
+    def __init__(self, data: pd.DataFrame, trend_threshold: float = 0.03):
         """Constructor of HangingMan class
 
         Parameters
@@ -21,7 +22,7 @@ class HangingMan(Pattern):
         self.trend = self.compute_relative_trend()
         self.trend_threshold = trend_threshold
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is a Hanging man
 

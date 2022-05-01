@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.pattern import Pattern
 
 
 class Engulfing(Pattern):
-    def __init__(self, data, trend_threshold: float = 0.03, stop_loss_shift: float = 0.02):
+    def __init__(self, data: pd.DataFrame, trend_threshold: float = 0.03, stop_loss_shift: float = 0.02):
         """Constructor of Engulfing class
 
         Parameters
@@ -26,7 +27,7 @@ class Engulfing(Pattern):
         self.trend_threshold = trend_threshold
         self.stop_loss_shift = stop_loss_shift
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is an engulfing.
         Conditions are the following from Steve Nison:

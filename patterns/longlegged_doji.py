@@ -1,10 +1,11 @@
 import numpy as np
+import pandas as pd
 
 from patterns.doji import Doji
 
 
 class LongleggedDoji(Doji):
-    def __init__(self, data, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
+    def __init__(self, data: pd.DataFrame, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
         """Constructor of LongleggedDoji class
 
         Parameters
@@ -22,7 +23,7 @@ class LongleggedDoji(Doji):
         self.total_range_change_threshold = total_range_change_threshold
         self.total_range_percent_change = self.compute_total_range_percent_change()
 
-    def compute_pattern(self):
+    def compute_pattern(self) -> pd.DataFrame:
         """
         Computes if a candlestick is a long-legged doji.
         Condition is the following from Steve Nison:
