@@ -1,6 +1,4 @@
-import sys
 import time
-sys.path.append('..')
 
 import numpy as np
 import pandas as pd
@@ -36,6 +34,7 @@ implemented_patterns = {'engulfing': Engulfing,
 
 
 class Notifier:
+    """Notifier class"""
     def __init__(self,
                  binance_public_key: str,
                  binance_secret_key: str,

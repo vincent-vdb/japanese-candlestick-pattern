@@ -17,7 +17,7 @@ class DragonflyDoji(Doji):
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         doji_threshold : float
             The maximum percentage change threshold below which to consider a candle a Doji.
             A value of 0.003 means a real body absolute relative change of maximum 0.3%.

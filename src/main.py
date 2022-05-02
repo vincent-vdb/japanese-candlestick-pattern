@@ -1,6 +1,5 @@
 from notifier import Notifier
 
-
 if __name__ == "__main__":
     # Define the params
     patterns = ['engulfing', 'harami',
@@ -11,10 +10,14 @@ if __name__ == "__main__":
     interval = '1m'
     pairs = ['BTCBUSD', 'ETHBUSD', 'BNBBUSD', 'ADABUSD', 'CAKEBUSD',
              'LTCBUSD', 'XRPBUSD', 'DOGEBUSD', 'DOTBUSD', 'SOLBUSD']
-    binance_public_key = #Add binance public key here
-    binance_secret_key = #Add binance private key here
+    binance_public_key = ''
+    binance_secret_key = ''
     # Instantiate the notifier
-    notif = Notifier(binance_public_key, binance_secret_key, patterns, interval, pairs, telegram_notif=True)
+    notif = Notifier(binance_public_key,
+                     binance_secret_key,
+                     patterns,
+                     interval,
+                     pairs,
+                     telegram_notif=False)
     # Run the notifier periodically
     notif.launch_scheduler()
-

@@ -17,9 +17,12 @@ class Pattern:
             A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         """
         self.data = data
-        self.real_body, self.upper_shadow, self.lower_shadow, self.total_range = self.compute_characteristics()
+        self.real_body, \
+        self.upper_shadow, \
+        self.lower_shadow, \
+        self.total_range = self.compute_characteristics()
 
-    def compute_characteristics(self) -> Tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
+    def compute_characteristics(self) -> Tuple[np.Series, pd.Series, pd.Series, pd.Series]:
         """Computes the following characteristics of candlesticks:
         - real body
         - upper shadow
