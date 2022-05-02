@@ -1,3 +1,4 @@
+"""Harami class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,16 +6,23 @@ from patterns.pattern import Pattern
 
 
 class Harami(Pattern):
-    def __init__(self, data: pd.DataFrame, harami_threshold: float = 2., percent_change_threshold: float = 0.03):
+    """Harami class"""
+
+    def __init__(self,
+                 data: pd.DataFrame,
+                 harami_threshold: float = 2.,
+                 percent_change_threshold: float = 0.03):
         """Constructor of Harami class
 
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         harami_threshold : float
-            The minimum ratio between a previous long and current short candle to consider it a Harami
-            A value of 2 means we expect the long candle's real body to be twice larger then second candle.
+            The minimum ratio between a previous long and current
+            short candle to consider it a Harami.
+            A value of 2 means we expect the long candle's
+            real body to be twice larger then second candle.
         percent_change_threshold : float
             The minimum percent change of the first candle in the Harami pattern.
             e.g. with the default value of 0.03, the first candle has to have a 3% change
@@ -29,12 +37,14 @@ class Harami(Pattern):
         """
         Computes if a candlestick is a Harami.
         Conditions are the following from Steve Nison:
-        - two adjacent candles, the first with long real body (a large percentage change), the second
-        with short real body (e.g. at least 2 times shorter than the first one)
-        - the two candles do not necessarily have opposite colors, but have to in crypto (since 24/7 and almost no gaps)
+        - two adjacent candles, the first with long real body (a large percentage change),
+         the second with short real body (e.g. at least 2 times shorter than the first one)
+        - the two candles do not necessarily have opposite colors, but have to in crypto
+        (since 24/7 and almost no gaps)
 
         Harami strength is computed according to the following rule of Nison:
-        - The smaller the second candle real body, the higher the strength (best case, cross harami with doji)
+        - The smaller the second candle real body, the higher the strength
+        (best case, cross harami with doji)
 
         Returns
         -------

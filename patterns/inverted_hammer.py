@@ -1,3 +1,4 @@
+"""InvertedHammer class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,13 +6,15 @@ from patterns.pattern import Pattern
 
 
 class InvertedHammer(Pattern):
+    """InvertedHammer class"""
+
     def __init__(self, data: pd.DataFrame, trend_threshold: float = 0.03):
         """Constructor of InvertedHammer class
 
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         trend_threshold : float
             The relative threshold above which the trend is considered non neutral.
             e.g. with the default value of 0.03, there has to be a relative trend of

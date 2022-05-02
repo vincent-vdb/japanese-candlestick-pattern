@@ -1,3 +1,4 @@
+"""DragonflyDoji class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,7 +6,12 @@ from patterns.doji import Doji
 
 
 class DragonflyDoji(Doji):
-    def __init__(self, data: pd.DataFrame, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
+    """DragonflyDoji class"""
+
+    def __init__(self,
+                 data: pd.DataFrame,
+                 doji_threshold: float = .003,
+                 total_range_change_threshold: float = 0.02):
         """Constructor of DragonflyDoji class
 
         Parameters
@@ -17,7 +23,8 @@ class DragonflyDoji(Doji):
             A value of 0.003 means a real body absolute relative change of maximum 0.3%.
         total_range_change_threshold : float
             The minimum total range threshold above which to consider a candle a dragonfly doji.
-            A value of 0.02 means a total candle range (High - Low) absolute relative change of minimum 2%.
+            A value of 0.02 means a total candle range (High - Low) absolute
+            relative change of at least 2%.
         """
         super().__init__(data, doji_threshold)
         self.total_range_change_threshold = total_range_change_threshold
@@ -44,9 +51,10 @@ class DragonflyDoji(Doji):
 
         """
         dragonfly_doji = np.all([self.is_doji(),
-                                  self.lower_shadow > 0.8 * self.total_range,
-                                  np.abs(self.total_range_percent_change) > self.total_range_change_threshold],
-                                 axis=0)
+                                 self.lower_shadow > 0.8 * self.total_range,
+                                 np.abs(self.total_range_percent_change) >
+                                 self.total_range_change_threshold],
+                                axis=0)
         self.data['dragonfly_doji'] = dragonfly_doji
 
         return self.data

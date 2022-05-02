@@ -1,3 +1,4 @@
+"""Doji class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,6 +6,8 @@ from patterns.pattern import Pattern
 
 
 class Doji(Pattern):
+    """Doji class"""
+
     def __init__(self, data: pd.DataFrame, doji_threshold: float = .003):
         """Constructor of Doji class
 
@@ -29,8 +32,8 @@ class Doji(Pattern):
         pandas.Series
             A series of True or False, whether a candle is a doji or not.
         """
-        doji_candle = np.abs((self.data.Close - self.data.Open) / self.data.Open) <= self.doji_threshold
-        return doji_candle
+        candle_diff = np.abs((self.data.Close - self.data.Open) / self.data.Open)
+        return candle_diff <= self.doji_threshold
 
     def compute_pattern(self) -> pd.DataFrame:
         """

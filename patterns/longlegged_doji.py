@@ -1,3 +1,4 @@
+"""LongleggedDoji class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,19 +6,25 @@ from patterns.doji import Doji
 
 
 class LongleggedDoji(Doji):
-    def __init__(self, data: pd.DataFrame, doji_threshold: float = .003, total_range_change_threshold: float = 0.02):
+    """LongleggedDoji class"""
+
+    def __init__(self,
+                 data: pd.DataFrame,
+                 doji_threshold: float = .003,
+                 total_range_change_threshold: float = 0.02):
         """Constructor of LongleggedDoji class
 
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         doji_threshold : float
             The maximum percentage change threshold below which to consider a candle a Doji.
             A value of 0.003 means a real body absolute relative change of maximum 0.3%.
         total_range_change_threshold : float
             The minimum total range threshold above which to consider a candle a gravestone doji.
-            A value of 0.02 means a total candle range (High - Low) absolute relative change of minimum 2%.
+            A value of 0.02 means a total candle range (High - Low) absolute
+            relative change of minimum 2%.
         """
         super().__init__(data, doji_threshold)
         self.total_range_change_threshold = total_range_change_threshold
@@ -44,7 +51,8 @@ class LongleggedDoji(Doji):
         longlegged_doji = np.all([self.is_doji(),
                                   self.upper_shadow > 0.4 * self.total_range,
                                   self.lower_shadow > 0.4 * self.total_range,
-                                  np.abs(self.total_range_percent_change) > self.total_range_change_threshold],
+                                  np.abs(self.total_range_percent_change) >
+                                  self.total_range_change_threshold],
                                  axis=0)
         self.data['longlegged_doji'] = longlegged_doji
 

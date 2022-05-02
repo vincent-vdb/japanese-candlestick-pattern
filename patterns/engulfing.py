@@ -1,3 +1,4 @@
+"""Engulfing class file"""
 import numpy as np
 import pandas as pd
 
@@ -5,16 +6,22 @@ from patterns.pattern import Pattern
 
 
 class Engulfing(Pattern):
-    def __init__(self, data: pd.DataFrame, trend_threshold: float = 0.03, stop_loss_shift: float = 0.02):
+    """Engulfing class"""
+
+    def __init__(self,
+                 data: pd.DataFrame,
+                 trend_threshold: float = 0.03,
+                 stop_loss_shift: float = 0.02):
         """Constructor of Engulfing class
 
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         trend_threshold : float
             The absolute relative threshold above which the trend is considered non neutral.
-            e.g. with the default value of 0.03, there has to be a relative trend of at least 3% to be considered.
+            e.g. with the default value of 0.03, there has to be a relative trend
+            of at least 3% to be considered.
             See Pattern documentation for relative trend computation details.
         stop_loss_shift : float
             The percentage shift for computing the stop loss.
@@ -31,19 +38,24 @@ class Engulfing(Pattern):
         """
         Computes if a candlestick is an engulfing.
         Conditions are the following from Steve Nison:
-        - market should be in clear trend (either bullish or bearish): this condition won't be tested here
+        - market should be in clear trend (either bullish or bearish): this condition
+        won't be tested here
         - two adjacent candles of opposite color
-        - the second candle is engulfing the first (since crypto is 24/7, we assume last close == current open,
-        thus no need to check engulfing per se, just to test real body heights)
+        - the second candle is engulfing the first (since crypto is 24/7,
+        we assume last close == current open, thus no need to check engulfing per se,
+        just to test real body heights)
 
         Engulfing strength is computed according to the following rules of Nison:
         - The bigger the second candle real body, the higher the strength
-        - The higher the second candle volume, the higher the strength (here computed relatively to first candle)
+        - The higher the second candle volume, the higher the
+        strength (here computed relatively to first candle)
 
         A stop loss is computed according to this rule:
-        - The stop loss is the close value of the first candle, +/- 2% for crypto fluctuations
+        - The stop loss is the close value of the first candle,
+        +/- 2% for crypto fluctuations
 
-        Warning, this does not check the trend, which is a very important part of engulfing patterns!
+        Warning, this does not check the trend, which is a very
+        important part of engulfing patterns!
 
         Returns
         -------
@@ -69,10 +81,14 @@ class Engulfing(Pattern):
         engulfing_strength = volume_ratio * candle_ratio
         # Log those values in the data
         self.data['engulfing'] = engulfing
-        self.data['engulfing_strength'] = np.abs(engulfing_strength) * engulfing * np.sign(self.real_body)
-        # The stop loss is the close of the previous candle, minus a 2% shift in case of bullish engulfing
+        self.data['engulfing_strength'] = np.abs(engulfing_strength) * \
+                                          engulfing * np.sign(self.real_body)
+        # The stop loss is the close of the previous candle,
+        # minus a 2% shift in case of bullish engulfing
         self.data['engulfing_stop_loss'] = (1 - self.stop_loss_shift) * self.data.Close.shift()
-        # In case of bearish engulfing (thus a bullish trend), the stop loss is the close plus a 2% shift
-        self.data.loc[self.trend > 0, 'engulfing_stop_loss'] = (1 + self.stop_loss_shift) * self.data.Close.shift()
+        # In case of bearish engulfing (thus a bullish trend),
+        # the stop loss is the close plus a 2% shift
+        self.data.loc[self.trend > 0, 'engulfing_stop_loss'] = (1 + self.stop_loss_shift) * \
+                                                               self.data.Close.shift()
 
         return self.data

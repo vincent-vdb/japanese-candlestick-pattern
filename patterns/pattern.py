@@ -1,3 +1,4 @@
+"""Pattern class file"""
 from typing import Tuple
 
 import numpy as np
@@ -5,14 +6,15 @@ import pandas as pd
 
 
 class Pattern:
+    """Pattern class"""
+
     def __init__(self, data: pd.DataFrame):
         """Constructor of Pattern class
 
         Parameters
         ----------
         data : pandas dataframe
-            A pandas dataframe, expected to have at least the Open, High, Low, Close, Volume columns
-
+            A pandas dataframe expected to have at least the Open, High, Low, Close, Volume columns
         """
         self.data = data
         self.real_body, self.upper_shadow, self.lower_shadow, self.total_range = self.compute_characteristics()
@@ -37,8 +39,10 @@ class Pattern:
         """
 
         real_body = self.data.Close - self.data.Open
-        upper_shadow = np.minimum(self.data.High - self.data.Close, self.data.High - self.data.Open)
-        lower_shadow = np.minimum(self.data.Close - self.data.Low, self.data.Open - self.data.Low)
+        upper_shadow = np.minimum(self.data.High - self.data.Close,
+                                  self.data.High - self.data.Open)
+        lower_shadow = np.minimum(self.data.Close - self.data.Low,
+                                  self.data.Open - self.data.Low)
         total_range = self.data.High - self.data.Low
 
         return real_body, upper_shadow, lower_shadow, total_range
