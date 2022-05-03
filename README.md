@@ -1,3 +1,5 @@
+![Pylint](https://github.com/vincent-vdb/japanese-candlestick-pattern/actions/workflows/pylint.yml/badge.svg)
+![pytest](https://github.com/vincent-vdb/japanese-candlestick-pattern/actions/workflows/python-package.yml/badge.svg)
 # japanese-candlestick-pattern
 
 # Install
