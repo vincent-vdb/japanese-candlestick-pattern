@@ -10,8 +10,8 @@ if __name__ == "__main__":
     interval = '1m'
     pairs = ['BTCBUSD', 'ETHBUSD', 'BNBBUSD', 'ADABUSD', 'CAKEBUSD',
              'LTCBUSD', 'XRPBUSD', 'DOGEBUSD', 'DOTBUSD', 'SOLBUSD']
-    binance_public_key = ''
-    binance_secret_key = ''
+    binance_public_key = '2td0qxvKzpFokhECn2ekcgvJfpLeqSWqag9fTbooHh4xFTMs75J6eFqpWhE9Mh4V'
+    binance_secret_key = 'I3a4sHzAF6gPhFfipFsLFaRSyS3KEEkP7M6Rp6fAtykQMKprojqhgRdg6Oknt3F4'
     # Instantiate the notifier
     notif = Notifier(binance_public_key,
                      binance_secret_key,

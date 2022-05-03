@@ -1,5 +1,5 @@
 import sys
-sys.path.append('..')
+sys.path.append('japanese_candlestick_pattern')
 
 import pytest
 import numpy as np
@@ -10,7 +10,7 @@ from patterns.pattern import Pattern
 @pytest.fixture
 def mock_dataset():
     """Return a mock dataframe as pattern input"""
-    return pd.read_csv('mock_dataframe_input.csv')
+    return pd.read_csv('japanese_candlestick_pattern/test/mock_dataframe_input.csv')
 
 
 def test_pattern_init(mock_dataset):

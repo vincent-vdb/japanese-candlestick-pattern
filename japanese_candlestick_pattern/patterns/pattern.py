@@ -22,7 +22,7 @@ class Pattern:
         self.lower_shadow, \
         self.total_range = self.compute_characteristics()
 
-    def compute_characteristics(self) -> Tuple[np.Series, pd.Series, pd.Series, pd.Series]:
+    def compute_characteristics(self) -> Tuple[pd.Series, pd.Series, pd.Series, pd.Series]:
         """Computes the following characteristics of candlesticks:
         - real body
         - upper shadow
@@ -44,8 +44,10 @@ class Pattern:
         real_body = self.data.Close - self.data.Open
         upper_shadow = np.minimum(self.data.High - self.data.Close,
                                   self.data.High - self.data.Open)
+        upper_shadow = pd.Series(upper_shadow, index=self.data.High.index)
         lower_shadow = np.minimum(self.data.Close - self.data.Low,
                                   self.data.Open - self.data.Low)
+        lower_shadow = pd.Series(lower_shadow, index=self.data.High.index)
         total_range = self.data.High - self.data.Low
 
         return real_body, upper_shadow, lower_shadow, total_range
