@@ -1,10 +1,11 @@
 import setuptools
+from pip.req import parse_requirements
+
+# parse_requirements() returns generator of pip.req.InstallRequirement objects
+install_reqs = parse_requirements("requirements.txt")
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-
-with open("requirements.txt", "r") as fh:
-    INSTALL_REQUIRES = [l.split('#')[0].strip() for l in fh if not l.strip().startswith('#')]
 
 setuptools.setup(
     name="japanese-candlestick",
@@ -27,5 +28,5 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    install_requires=INSTALL_REQUIRES,
+    install_requires=install_reqs,
 )
