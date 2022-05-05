@@ -1,15 +1,11 @@
 import setuptools
-from pip.req import parse_requirements
-
-# parse_requirements() returns generator of pip.req.InstallRequirement objects
-install_reqs = parse_requirements("requirements.txt")
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="japanese-candlestick",
-    version="0.0.1",
+    version="0.0.4",
     author="Vincent Vandenbussche",
     author_email="vandenbussche.vincent@gmail.com",
     license="MIT",
@@ -28,5 +24,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    install_requires=install_reqs,
+    install_requires=["numpy==1.22.3",
+                      "pandas==1.4.2",
+                      "python-binance==1.0.16",
+                      "telegram-send==0.33.1",
+                      "schedule==1.1.0"],
 )
