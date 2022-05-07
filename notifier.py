@@ -6,18 +6,7 @@ from binance.client import Client
 import telegram_send
 import schedule  # first time pip install schedule
 
-from patterns.hammer import Hammer
-from patterns.hanging_man import HangingMan
-from patterns.inverted_hammer import InvertedHammer
-from patterns.shooting_star import ShootingStar
-from patterns.engulfing import Engulfing
-from patterns.harami import Harami
-from patterns.three_white_soldiers import ThreeWhiteSoldiers
-from patterns.three_black_crows import ThreeBlackCrows
-from patterns.doji import Doji
-from patterns.dragonfly_doji import DragonflyDoji
-from patterns.gravestone_doji import GravestoneDoji
-from patterns.longlegged_doji import LongleggedDoji
+from patterns import *
 
 implemented_patterns = {'engulfing': Engulfing,
                         'hammer': Hammer,
