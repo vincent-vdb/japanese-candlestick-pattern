@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="japanese-candlestick",
-    version="0.0.5",
+    version="0.1.0",
     author="Vincent Vandenbussche",
     author_email="vandenbussche.vincent@gmail.com",
     license="MIT",
