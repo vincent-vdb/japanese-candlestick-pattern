@@ -1,11 +1,8 @@
-import sys
-sys.path.append('japanese_candlestick_pattern')
-
 import pytest
 import numpy as np
 import pandas as pd
 
-from patterns.pattern import Pattern
+from patterns import Pattern
 
 @pytest.fixture
 def mock_dataset():
