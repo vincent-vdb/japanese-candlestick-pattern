@@ -9,7 +9,7 @@ def mock_dataset():
     return pd.read_csv('patterns/test/mock_dataframe_input.csv')
 
 def test_dragonfly_doji_init(mock_dataset):
-    """Test the Doji init"""
+    """Test the DragonflyDoji init"""
     # Default DragonflyDoji init
     ddoji = DragonflyDoji(mock_dataset)
     assert isinstance(ddoji.data, pd.DataFrame)
