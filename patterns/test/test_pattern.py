@@ -1,3 +1,4 @@
+"""Pattern test file"""
 import pytest
 import numpy as np
 import pandas as pd
