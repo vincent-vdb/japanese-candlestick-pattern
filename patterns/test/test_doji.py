@@ -25,6 +25,7 @@ def test_doji_init(mock_dataset):
     pd.testing.assert_series_equal(doji.percent_change, doji.compute_percent_change())
 
 def test_is_doji():
+    """Test is_doji method"""
     # Create a fake dataframe with 2 dojis and one non doji times
     data = pd.DataFrame({'Open': [1, 2, 1000],
                          'High': [2, 3, 1100],
