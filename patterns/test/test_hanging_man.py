@@ -1,13 +1,8 @@
 """HangingMan test file"""
-import pytest
 import pandas as pd
 
 from patterns import HangingMan
 
-@pytest.fixture
-def mock_dataset():
-    """Return a mock dataframe as pattern input"""
-    return pd.read_csv('patterns/test/mock_dataframe_input.csv')
 
 def test_hanging_man_init(mock_dataset):
     """Test the HangingMan init"""

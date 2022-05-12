@@ -1,13 +1,8 @@
 """Hammer test file"""
-import pytest
 import pandas as pd
 
 from patterns import Hammer
 
-@pytest.fixture
-def mock_dataset():
-    """Return a mock dataframe as pattern input"""
-    return pd.read_csv('patterns/test/mock_dataframe_input.csv')
 
 def test_hammer_init(mock_dataset):
     """Test the Hammer init"""

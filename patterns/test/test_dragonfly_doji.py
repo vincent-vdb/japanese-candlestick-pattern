@@ -1,13 +1,8 @@
 """DragonflyDoji test file"""
-import pytest
 import pandas as pd
 
 from patterns import DragonflyDoji
 
-@pytest.fixture
-def mock_dataset():
-    """Return a mock dataframe as pattern input"""
-    return pd.read_csv('patterns/test/mock_dataframe_input.csv')
 
 def test_dragonfly_doji_init(mock_dataset):
     """Test the DragonflyDoji init"""
