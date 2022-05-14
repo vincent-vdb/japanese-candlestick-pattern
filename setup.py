@@ -1,11 +1,12 @@
+"""Setup file"""
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="japanese-candlestick",
-    version="0.1.0",
+    version="0.2.0",
     author="Vincent Vandenbussche",
     author_email="vandenbussche.vincent@gmail.com",
     license="MIT",
