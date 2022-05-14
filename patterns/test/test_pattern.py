@@ -1,16 +1,8 @@
-import sys
-sys.path.append('japanese_candlestick_pattern')
-
-import pytest
+"""Pattern test file"""
 import numpy as np
 import pandas as pd
 
-from patterns.pattern import Pattern
-
-@pytest.fixture
-def mock_dataset():
-    """Return a mock dataframe as pattern input"""
-    return pd.read_csv('patterns/test/mock_dataframe_input.csv')
+from patterns import Pattern
 
 
 def test_pattern_init(mock_dataset):

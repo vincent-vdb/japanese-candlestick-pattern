@@ -1,3 +1,4 @@
+"""patterns init file"""
 from .doji import Doji
 from .dragonfly_doji import DragonflyDoji
 from .engulfing import Engulfing
